@@ -9,7 +9,7 @@ def get_image_hash(image_path):
     with open(image_path, "rb") as f:
         return hashlib.md5(f.read()).hexdigest()
 
-
+## 중복되는 이미지 제거 ##
 def remove_duplicates(folder_path):
     """중복 이미지 제거."""
     seen_hashes = set()
@@ -27,7 +27,7 @@ def remove_duplicates(folder_path):
                 seen_hashes.add(img_hash)
     print(f"중복 이미지 {duplicates}개 제거 완료.")
 
-
+## 손상된 이미지 제거 ##
 def remove_corrupted_files(folder_path):
     """손상된 이미지 제거."""
     corrupted = 0
@@ -43,7 +43,7 @@ def remove_corrupted_files(folder_path):
                 corrupted += 1
     print(f"손상된 파일 {corrupted}개 제거 완료.")
 
-
+## 이미지 폴더 별 개수 카운트 ##
 def count_classes(folder_path):
     """클래스별 데이터 개수 확인."""
     counts = defaultdict(int)
@@ -56,7 +56,7 @@ def count_classes(folder_path):
     for label, count in counts.items():
         print(f"{label}: {count}장")
 
-
+## 이미지 크기 정규화 ##
 def resize_images(folder_path, target_size=(224, 224)):
     """이미지 크기 정규화."""
     resized = 0
@@ -73,7 +73,7 @@ def resize_images(folder_path, target_size=(224, 224)):
                 continue
     print(f"{resized}개의 이미지 크기 변경 완료.")
 
-
+## 데이터 증강 ##
 def augment_data(folder_path):
     """데이터 증강."""
     augmentations = {"rotate_90": lambda img: img.rotate(90),
@@ -93,7 +93,7 @@ def augment_data(folder_path):
                 continue
     print("데이터 증강 완료.")
 
-
+## 메타데이터 추가 ##
 def add_metadata(folder_path):
     """메타데이터 추가."""
     metadata = []
@@ -115,7 +115,7 @@ def add_metadata(folder_path):
         print(data)
     print("메타데이터 기록 완료.")
 
-
+## 이상치 제거 ##
 def filter_outliers(folder_path, min_size=(50, 50)):
     """이상치 제거."""
     removed = 0
@@ -132,7 +132,7 @@ def filter_outliers(folder_path, min_size=(50, 50)):
                 continue
     print(f"이상치 {removed}개 제거 완료.")
 
-
+## 전체 전처리 진행 ##
 def preprocess_data(folder_path):
     """전체 전처리 워크플로."""
     print("중복 제거 시작...")
