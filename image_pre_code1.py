@@ -156,7 +156,7 @@ def preprocess_data(folder_path):
     print("이상치 제거...")
     filter_outliers(folder_path)
 
-
+## 전체 실행 ##
 # 실행
 if __name__ == "__main__":
     # 전처리할 폴더 경로 지정
