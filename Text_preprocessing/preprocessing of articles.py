@@ -8,7 +8,7 @@ sheet_name = "10월_빈대_확인_수정"
 target_column = "뉴스 제목"  # 처리할 열 이름 또는 위치
 df = pd.read_excel(file_path, sheet_name=sheet_name)
 
-# # 함수 정의
+# # 함수 정의 (직접 입력하는 방식_코드)
 # def categorize_result1(value):
 #     keywords = [
 #         "방역", "소독", "예방", "박멸", "점검",
