@@ -1,12 +1,8 @@
 import pandas as pd
 
-# 엑셀 파일 및 시트 설정
-file_path = "기사 크롤링.xlsx"  # 파일 경로
-# 사용할 시트 이름
-# 각 시트마다 이름바꿔서 시행하면 됨
-sheet_name = "10월_빈대_확인_수정"
-target_column = "뉴스 제목"  # 처리할 열 이름 또는 위치
-df = pd.read_excel(file_path, sheet_name=sheet_name)
+# 엑셀 파일 경로
+file_path = "기사 크롤링.xlsx"  # 입력 파일 경로
+output_file = "기사 크롤링_처리결과.xlsx"  # 결과 파일 경로
 
 # # 함수 정의
 # def categorize_result1(value):
@@ -94,17 +90,38 @@ keyword_groups = {
 }
 
 # 키워드 검색 함수
-def categorize(value, keywords):
+def categorize(value, keywords):  # value는 "뉴스제목" 열의 값
     for keyword in keywords:
+        # 각 keyword에 대해 value에 해당 키워드가 포함되어 있는지 확인
         if keyword in str(value):
             return keyword
     return ""
 
-# 결과 계산 및 저장
+# 모든 시트를 하나로 병합
+all_sheets = pd.ExcelFile(file_path)
+merged_df = pd.DataFrame()
+
+# 파일에 있는 모든 시트 이름 리스트 불러오기
+for sheet_name in all_sheets.sheet_names:
+    # 각 시트를 데이터 프레임으로 변환
+    sheet_df = all_sheets.parse(sheet_name)
+    sheet_df['시트명'] = sheet_name  # 각 데이터에 시트명 열 추가
+    # 각 시트를 merged_df에 순차적으로 추가
+    merged_df = pd.concat([merged_df, sheet_df], ignore_index=True)
+
+# 결과 열 생성
 for result_col, keywords in keyword_groups.items():
-    df[result_col] = df[target_column].apply(categorize, keywords=keywords)
+    # 뉴스 제목이 있는 경우에만 처리
+    if '뉴스 제목' in merged_df.columns:
+        # 뉴스 제목 열의 각 값(value)에 대해 categorize 함수를 호출
+        # 결과를 새로운 열(result1, result2, result3)로 저장
+        merged_df[result_col] = merged_df['뉴스 제목'].apply(categorize, keywords=keywords)
+    else:
+        print(f"'뉴스 제목' 열이 없습니다. 처리할 수 없습니다.")
 
 # 처리된 데이터 저장
-output_file = "기사 크롤링_처리결과.xlsx"
-df.to_excel(output_file, index=False)
-print(f"결과가 저장되었습니다: {output_file}")
+with pd.ExcelWriter(output_file, engine='openpyxl') as writer:
+    # 병합된 데이터 저장
+    merged_df.to_excel(writer, index=False, sheet_name='병합된 데이터')
+
+print(f"모든 시트 데이터를 병합하고, 결과를 포함한 파일이 저장되었습니다: {output_file}")
