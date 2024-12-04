@@ -3,34 +3,34 @@ import hashlib
 from PIL import Image, ImageEnhance
 from collections import defaultdict
 
-
+## 이미지 해시 생성 ##
+# 이미지 파일의 고유 해시값 생성하여 중복을 식별하는 함수
 def get_image_hash(image_path):
-    """이미지 파일의 해시 생성."""
-    with open(image_path, "rb") as f:
-        return hashlib.md5(f.read()).hexdigest()
+    with open(image_path, "rb") as f: # binary mode로 파일 open
+        return hashlib.md5(f.read()).hexdigest() #MD5 해시값 생성 및 반환
 
-
+## 중복되는 이미지 제거 ##
+# 같은 해시값 가진 이미지 파일 찾아 제거
 def remove_duplicates(folder_path):
-    """중복 이미지 제거."""
-    seen_hashes = set()
-    duplicates = 0
+    seen_hashes = set() #이미 처리된 해시값 저장
+    duplicates = 0 #제거된 중복 이미지 개수
 
-    for root, _, files in os.walk(folder_path):
+    for root, _, files in os.walk(folder_path): #폴더 내 모든 파일 탐색
         for file in files:
-            file_path = os.path.join(root, file)
-            img_hash = get_image_hash(file_path)
+            file_path = os.path.join(root, file) # 파일의 전체 경로 생성
+            img_hash = get_image_hash(file_path) # 이미지 해시값 생성
 
-            if img_hash in seen_hashes:
-                os.remove(file_path)
+            if img_hash in seen_hashes: # 위에서 이미 본 해시값인지 확인
+                os.remove(file_path) # 중복 이미지 파일 삭제
                 duplicates += 1
             else:
-                seen_hashes.add(img_hash)
-    print(f"중복 이미지 {duplicates}개 제거 완료.")
+                seen_hashes.add(img_hash) # 새로운 해시값 저장
+    print(f"중복 이미지 {duplicates}개 제거 완료.") # 중복 제거 결과 출력
 
-
+## 손상된 이미지 제거 ##
+# 파일 유효성 검사에 실패한 손상된 이미지 삭제
 def remove_corrupted_files(folder_path):
-    """손상된 이미지 제거."""
-    corrupted = 0
+    corrupted = 0 # 제거된 손상된 이미지 개수
 
     for root, _, files in os.walk(folder_path):
         for file in files:
@@ -43,9 +43,8 @@ def remove_corrupted_files(folder_path):
                 corrupted += 1
     print(f"손상된 파일 {corrupted}개 제거 완료.")
 
-
+## 이미지 폴더 별 개수 카운트 ##
 def count_classes(folder_path):
-    """클래스별 데이터 개수 확인."""
     counts = defaultdict(int)
 
     for root, _, files in os.walk(folder_path):
@@ -56,9 +55,8 @@ def count_classes(folder_path):
     for label, count in counts.items():
         print(f"{label}: {count}장")
 
-
+## 이미지 크기 정규화 ##
 def resize_images(folder_path, target_size=(224, 224)):
-    """이미지 크기 정규화."""
     resized = 0
 
     for root, _, files in os.walk(folder_path):
@@ -73,9 +71,8 @@ def resize_images(folder_path, target_size=(224, 224)):
                 continue
     print(f"{resized}개의 이미지 크기 변경 완료.")
 
-
+## 데이터 증강 ##
 def augment_data(folder_path):
-    """데이터 증강."""
     augmentations = {"rotate_90": lambda img: img.rotate(90),
                      "rotate_180": lambda img: img.rotate(180),
                      "enhance_brightness": lambda img: ImageEnhance.Brightness(img).enhance(1.5)}
@@ -93,9 +90,8 @@ def augment_data(folder_path):
                 continue
     print("데이터 증강 완료.")
 
-
+## 메타데이터 추가 ##
 def add_metadata(folder_path):
-    """메타데이터 추가."""
     metadata = []
 
     for root, _, files in os.walk(folder_path):
@@ -115,9 +111,8 @@ def add_metadata(folder_path):
         print(data)
     print("메타데이터 기록 완료.")
 
-
+## 이상치 제거 ##
 def filter_outliers(folder_path, min_size=(50, 50)):
-    """이상치 제거."""
     removed = 0
 
     for root, _, files in os.walk(folder_path):
@@ -132,9 +127,8 @@ def filter_outliers(folder_path, min_size=(50, 50)):
                 continue
     print(f"이상치 {removed}개 제거 완료.")
 
-
+## 전체 전처리 진행 ##
 def preprocess_data(folder_path):
-    """전체 전처리 워크플로."""
     print("중복 제거 시작...")
     remove_duplicates(folder_path)
 
@@ -156,7 +150,7 @@ def preprocess_data(folder_path):
     print("이상치 제거...")
     filter_outliers(folder_path)
 
-
+## 전체 실행 ##
 # 실행
 if __name__ == "__main__":
     # 전처리할 폴더 경로 지정

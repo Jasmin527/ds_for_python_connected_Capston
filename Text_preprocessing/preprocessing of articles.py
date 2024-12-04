@@ -4,7 +4,7 @@ import pandas as pd
 file_path = "기사 크롤링.xlsx"  # 입력 파일 경로
 output_file = "기사 크롤링_처리결과.xlsx"  # 결과 파일 경로
 
-# # 함수 정의
+# # 함수 정의 (직접 입력하는 방식_코드)
 # def categorize_result1(value):
 #     keywords = [
 #         "방역", "소독", "예방", "박멸", "점검",
