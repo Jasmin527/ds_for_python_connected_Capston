@@ -1,7 +1,7 @@
 import pandas as pd
 
 # 엑셀 파일 경로
-file_path = "기사 크롤링_처리결과.xlsx"  # 입력 파일 경로
+file_path = "기사 크롤링_처리결과_도시별빈도.xlsx"  # 입력 파일 경로
 output_file = "기사 크롤링_처리결과_도시별빈도.xlsx"  # 결과 파일 경로
 
 # 키워드 그룹 정의
@@ -55,11 +55,10 @@ try:
         keyword_count_df = pd.DataFrame(list(keyword_counts.items()), columns=['키워드', '뉴스 개수'])
 
         # 처리된 데이터 저장
-        with pd.ExcelWriter(output_file, engine='openpyxl') as writer:
-            df.to_excel(writer, index=False, sheet_name='기사 크롤링_결과_단어빈도')
+        with pd.ExcelWriter(output_file, engine='openpyxl', mode='a', if_sheet_exists='replace') as writer:
             keyword_count_df.to_excel(writer, index=False, sheet_name='키워드별 뉴스 개수')
 
-        print(f"'기사 크롤링_결과_단어빈도' 시트를 처리하고 결과를 저장했습니다: {output_file}")
+        print(f"'키워드별 뉴스 개수' 시트를 추가하고 결과를 저장했습니다: {output_file}")
     else:
         print("'뉴스 제목' 열이 없습니다. 키워드 분석을 수행할 수 없습니다.")
 except Exception as e:
