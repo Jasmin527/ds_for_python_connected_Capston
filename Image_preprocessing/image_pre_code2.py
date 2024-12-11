@@ -170,8 +170,8 @@ def preprocess_data(folder_path):
 if __name__ == "__main__":
     # 절대 경로로 전처리할 폴더 경로 지정
     folder_paths = [
-        "C:/Users/yeseo/PycharmProjects/ds_for_python_connected_Capston/bedbug_correct_scholar",
-        "C:/Users/yeseo/PycharmProjects/ds_for_python_connected_Capston/bedbug_incorrect_scholar"
+        "C:/Users/yeseo/PycharmProjects/ds_for_python_connected_Capston/bedbug_correct_scholar", #개인 경로로 변경 필요
+        "C:/Users/yeseo/PycharmProjects/ds_for_python_connected_Capston/bedbug_incorrect_scholar" #개인 경로로 변경 필요
     ]
 
     # 각 폴더에 대해 전처리 실행
