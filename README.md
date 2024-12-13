@@ -114,6 +114,3 @@
   - 같은 날 언급된 경우의 중복 횟수 전처리
   - 빈대 출몰 민감도 (개수 count) <br/>
     : 같은 주제의 기사의 개수 多, 해당 이슈에 대해 민감하게 반응하고 있음 의미 <br/>
-
-![Languages](https://img.shields.io/github/languages/top/{Jasmin527}/{https://github.com/Jasmin527/ds_for_python_connected_Capston.git})
-![Contributors](https://img.shields.io/github/contributors/{Jasmin527}/{https://github.com/Jasmin527/ds_for_python_connected_Capston.git})
