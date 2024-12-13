@@ -1,19 +1,14 @@
 import pandas as pd
 
 # 엑셀 파일 경로
-file_path = "기사 크롤링_처리결과.xlsx"  # 입력 파일 경로
+file_path = "기사 크롤링_처리결과_도시별빈도.xlsx"  # 입력 파일 경로
 output_file = "기사 크롤링_처리결과_도시별빈도.xlsx"  # 결과 파일 경로
 
 # 키워드 그룹 정의
 keyword_groups = {
     'result': [
-        "인천 서구 사우나", "대구 계명대 기숙사", "대구 부천 고시원", "서울 고시원", "서울 가정집", "서울 빈대 확인 18곳", "인천 1평 방",
-        "서울 빈대 발견 신고 17건", "서울 지하철, KTX", "수원역 무궁화->대전KTX->(동)대구", "서울 빈대 출몰 23건", "충남 아산 원룸",
-        "서울 강남구 대형 찜질방", "충남 서산", "기숙학원 빈대", "충남 당진 주택", "경기 인천 중학교", "경기도 수원 일반 주택",
-        "경기 빈대 확인 5건", "충남 천안 대학 기숙사", "대전 서구 가정집 2곳", "충북 충주 가정집(다세대주택)", "부산 사하구 가정집",
-        "전남 진도군 의신면 김양식장 외국인 숙소", "울산 울주군 원룸", "광주 서구 쌍촌동 단독주택 반지하", "충북 청주 가정집 2곳",
-        "충북 진천 숙박시설 1곳", "대구 고교 기숙사", "인천 서구 중학교(재발)", "강원 원주 외국인 기숙사", "목포 찜질방",
-        "충청북도 진천시 가정집", "충청북도 청주 가정집", "충청북도 음성 가정집", "충청남도 보령 동대동"
+        "사우나", "기숙사", "고시원", "가정집", "지하철", "KTX", "무궁화", "원룸", "찜질방", "주택", "중학교", "외국인 숙소",
+        "숙박시설", "학교"
     ]
 }
 
@@ -55,11 +50,10 @@ try:
         keyword_count_df = pd.DataFrame(list(keyword_counts.items()), columns=['키워드', '뉴스 개수'])
 
         # 처리된 데이터 저장
-        with pd.ExcelWriter(output_file, engine='openpyxl') as writer:
-            df.to_excel(writer, index=False, sheet_name='기사 크롤링_결과_단어빈도')
+        with pd.ExcelWriter(output_file, engine='openpyxl', mode='a', if_sheet_exists='replace') as writer:
             keyword_count_df.to_excel(writer, index=False, sheet_name='키워드별 뉴스 개수')
 
-        print(f"'기사 크롤링_결과_단어빈도' 시트를 처리하고 결과를 저장했습니다: {output_file}")
+        print(f"'키워드별 뉴스 개수' 시트를 추가하고 결과를 저장했습니다: {output_file}")
     else:
         print("'뉴스 제목' 열이 없습니다. 키워드 분석을 수행할 수 없습니다.")
 except Exception as e:
