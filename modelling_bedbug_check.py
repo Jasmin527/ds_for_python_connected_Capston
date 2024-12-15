@@ -1,3 +1,4 @@
+#패키지 설치
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from collections import Counter
