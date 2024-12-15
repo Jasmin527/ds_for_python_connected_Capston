@@ -10,7 +10,7 @@ plt.rcParams['font.family'] = 'Malgun Gothic'  # 윈도우: 맑은 고딕
 plt.rcParams['axes.unicode_minus'] = False
 
 # CSV 파일 불러오기
-df_2023 = pd.read_csv("text_crawling/2023_빈대_확인.csv")
+df_2023 = pd.read_csv("text_crawling_file/2023_빈대_확인.csv")
 df_2024 = pd.read_csv("text_crawling/2024_빈대_확인.csv")
 
 # 날짜를 datetime 형식으로 변환 (날짜 형식 'yyyy.mm.dd' 처리)
