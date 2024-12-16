@@ -1,8 +1,8 @@
 #키워드 '빈대' 네이버 뉴스 크롤링 코드
-from selenium import webdriver
-from bs4 import BeautifulSoup
-import pandas as pd
-import time
+from selenium import webdriver #Selenium을 이용한 웹 드라이버 제어
+from bs4 import BeautifulSoup #HTML 파싱을 위한 BeautifulSoup
+import pandas as pd #데이터 처리 및 저장을 위한 Pandas
+import time #대기 시간을 설정하기 위한 time
 
 try:
     #WebDriver 초기화 과정 가지기
@@ -12,8 +12,8 @@ try:
     #23년도 9, 10, 11월과 24년도 9, 10, 11월
     periods = ["2023.09", "2023.10", "2023.11", "2024.09", "2024.10", "2024.11"]
     
-    for period in periods: 
-        year, month = period.split('.')
+    for period in periods: #periods 리스트에서 각 기간(연.월)을 반복
+        year, month = period.split('.') #연도와 월을 '.' 기준으로 분리
 
         #기사 데이터(기사 작성 날짜, 날짜당 기사 개수, 뉴스 제목)를 저장하는 딕셔너리 생성하기
         data = {'날짜': [], '번호': [], '뉴스 제목': []}
@@ -31,7 +31,7 @@ try:
                    f"&field=0&pd=3&ds={period}.{formatted_day}&de={period}.{formatted_day}&mynews=1&office_type=0&"
                    f"office_section_code=0&news_office_checked=&office_category=0&service_area=0")
 
-            article_number = 1  #기사 번호 초기화하기
+            article_number = 1  #기사 번호 1로 초기화하기
 
             while True:  #스크롤을 통하여 모든 기사 DATA를 가져올 수 있게하는 while문
                 browser.get(url)
@@ -43,9 +43,9 @@ try:
                     browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
                     time.sleep(1)  #스크롤 후 새 정보를 원활하게 받아오기 위해서 1초의 시간을 줌.
                     new_height = browser.execute_script("return document.body.scrollHeight")
-                    if new_height == last_height:
-                        break
-                    last_height = new_height
+                    if new_height == last_height: #스크롤 높이가 이전 높이와 같으면 (더 이상 스크롤이 진행되지 않으면)
+                        break #반복문 종료
+                    last_height = new_height #현재 스크롤 높이를 이전 높이로 업데이트
 
                 #HTML 파싱 과정 가지기
                 html = browser.page_source
@@ -58,9 +58,9 @@ try:
                     print(f"{period}.{formatted_day}에서 더 이상 기사 데이터를 찾을 수 없습니다.")
                     break
 
-                for i in name_list:
-                    date_str = f"{period}.{formatted_day}"
-                    title = i.get_text().strip()
+                for i in name_list: #name_list의 각 항목(i)을 반복
+                    date_str = f"{period}.{formatted_day}" # 현재 기간과 포맷된 날짜를 조합하여 날짜 문자열 생성
+                    title = i.get_text().strip() #요소의 텍스트를 가져와 공백 제거 후 제목으로 저장
 
                     #각 칼럼 별로 데이터 값을 저장하기
                     data['날짜'].append(date_str)
@@ -78,12 +78,12 @@ try:
         df = pd.DataFrame(data)
 
         #dataframe을 CSV로 저장하기
-        csv_filename = f"{year}년_{month}월_빈대.csv"
+        csv_filename = f"{year}_{month}_bedbug.csv"
         df.to_csv(csv_filename, encoding='utf-8-sig', index=False)
         print(f"크롤링 완료! 저장된 파일: {csv_filename}")
 
-except Exception as e:
-    print("에러 발생:", e)
+except Exception as e: #예외 발생 시 실행되는 블록
+    print("에러 발생:", e) #발생한 에러 메시지를 출력
 
 finally:
     if 'browser' in locals():
