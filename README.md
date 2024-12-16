@@ -1,21 +1,11 @@
- crawler
-### 🐞 파이썬을 이용한 데이터사이언스_캡스톤디자인 연계실습
-=======
+
 # 🐞 파이썬을 이용한 데이터사이언스_캡스톤디자인 연계실습 🐞
- master
 
 <div align> 
 <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white">
 <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white">
 <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white">
 </div align> 
-
- crawler
-------
-
-#### 🖥️ 연구 주제
-=======
-&nbsp;
 
 ## 👥 Members
 **[데이터사이언스학과]**
@@ -25,7 +15,6 @@
 &nbsp;
 
 ##  🔎 Research subject
- master
 #### [Background]
 
 
@@ -34,7 +23,6 @@
 
   ⇒ 개인적 및 사회적 영향이 크고 문제 해결이 필요하다고 판단
 
- crawler
 &nbsp;
 
 |시기적 영향|빈대의 특성|현황|
@@ -48,19 +36,6 @@
 |------|------|------|------|
 
 &nbsp;
-
-------
-
-#### 📈 Develop
-1. matplotlib 이용한 빈대 번식 지역 시각화
-2. 이전에 수집한 이미지, 텍스트 데이터 전처리
-&nbsp;
-
-    2-1) 이미지 데이터 : 중복 데이터 제거(해상도, 해시값, 크기 등 비교), 손상된 데이터 제거, 
-=======
-
-#### [Cause analysis]
-
 
 |시기적 영향|빈대의 특성|현황|
 |-----|-----|-----|
@@ -161,5 +136,3 @@
 **(2) word-cloud**
   - 2023년/2024년에 뉴스에서 가장 많이 출현된 단어를 파악 (단어 빈도 분석)
   - 단어 빈도 분석을 통해 그 당시 중요하게 생각했던 요소들을 파악 및 비교 가능
-
- master
