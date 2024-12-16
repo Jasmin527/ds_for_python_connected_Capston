@@ -32,10 +32,10 @@ try:
 
             article_number = 1  # 기사 번호 초기화
 
-            while True:
-                browser.get(url)
-                time.sleep(2)
-
+            while True: #반복문 시작
+                browser.get(url) #URL로 브라우저 이동
+                time.sleep(2) #페이지 로드 대기 시간 2초 설정
+                
                 # 페이지 끝까지 스크롤
                 last_height = browser.execute_script("return document.body.scrollHeight") #현재 페이지의 전체 스크롤 높이를 가져옴
                 while True:
