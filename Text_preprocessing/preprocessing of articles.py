@@ -1,10 +1,10 @@
 import pandas as pd
 
 # 파일 경로 정의
-file1_path = "2023_빈대_신고.csv"  # 첫 번째 CSV 파일
-file2_path = "2023_빈대_확인.csv"  # 두 번째 CSV 파일
-output_file = "2023_빈대_통합.csv"  # 통합된 CSV 파일 경로
-processed_file = "기사 크롤링_처리결과.xlsx"  # 처리된 결과 저장 경로
+file1_path = "2023_bedbug_check"  # 첫 번째 CSV 파일
+file2_path = "2023_bedbug_declaration.csv"  # 두 번째 CSV 파일
+output_file = "2023_bedbug_integration.csv"  # 통합된 CSV 파일 경로
+processed_file = "article_crawling.xlsx"  # 처리된 결과 저장 경로
 
 # 키워드 사전 정의
 keyword_groups = {
