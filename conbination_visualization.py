@@ -6,6 +6,7 @@ import matplotlib.patches as mpatches
 import seaborn as sns
 from matplotlib import font_manager, rc
 import folium
+import webbrowser
 
 # 1. 한글 폰트 설정
 font_path = "C:/Windows/Fonts/malgun.ttf"  # Windows의 맑은 고딕 경로
@@ -40,42 +41,88 @@ locations = {
     "울산광역시": [35.5664, 129.3190],
     "세종특별자치시": [36.4801, 127.2889],
     "충청도": [36.6419, 127.4898],
-    "전라도": [35.8242, 127.1489],
-    "경상도": [35.8722, 128.6025],
+    "전라도": [35.7623, 127.1489],
+    "경상도": [35.8242, 128.9489],
     "제주특별자치도": [33.4996, 126.5312]
 }
 
 def get_color(value):
-    if value <= 10:
-        return "green"
-    elif 11 <= value <= 20:
-        return "yellow"
-    elif 21 <= value <= 30:
-        return "orange"
-    else:
-        return "red"
+    if value <= 10:  # 횟수가 10 이하일 경우
+        return "green"  # 초록색
+    elif 11 <= value <= 20:  # 횟수가 11~20일 경우
+        return "yellow"  # 노란색
+    elif 21 <= value <= 30:  # 횟수가 21~30일 경우
+        return "orange"  # 주황색
+    else:  # 횟수가 30 이상일 경우
+        return "red"  # 빨간색
 
-# Folium을 활용한 대화형 지도 생성
+# 5. 지도 생성 (중심은 서울로 설정)
+map_center = [37.5665, 126.9780]  # 서울특별시의 위도와 경도를 지도 중심으로 설정
+map_display = folium.Map(location=map_center, zoom_start=8)  # Folium으로 지도 객체 생성, zoom_level은 8로 설정
+
+# 6. 각 지역에 대한 점을 지도에 추가
 df_bar = pd.read_excel(excel_file, sheet_name=2)
-folium_map = folium.Map(location=[36.5, 127.5], zoom_start=7)
+for _, row in df_bar.iterrows():  # 데이터프레임의 각 행을 반복하면서 처리
+    region = row['지역']  # 지역 이름
+    count = row['횟수']  # 횟수
 
-for _, row in df_bar.iterrows():
-    region = row['지역']
-    count = row['횟수']
-    if region in locations:
-        lat, lon = locations[region]
-        folium.CircleMarker(
-            location=[lat, lon],
-            radius=10,
-            color=get_color(count),
-            fill=True,
-            fill_color=get_color(count),
-            fill_opacity=0.7,
-            tooltip=f"{region}: {count}회"
-        ).add_to(folium_map)
+    # 지역별 위도, 경도 정보 추출
+    if region in locations:  # 해당 지역이 locations에 존재하면
+        latitude, longitude = locations[region]  # 위도, 경도 정보 추출
 
-# 대화형 지도 저장
-folium_map.save("23.10.13-11.30 한국 빈대 출몰 현황.html")
+        # 횟수에 따라 색상 결정
+        color = get_color(count)  # 횟수에 맞는 색상 값 받아옴
+
+        # 원형 마커 추가 (색상과 크기 설정)
+        circle_marker = folium.CircleMarker(
+            location=[latitude, longitude],  # 마커의 위치는 위도, 경도
+            radius=15,  # 원 크기 설정 (기본 크기보다 크게 설정)
+            color=color,  # 원 테두리 색상
+            fill=True,  # 원 안을 채우기
+            fill_color=color,  # 원 안 채우기 색상
+            fill_opacity=0.7,  # 채우기 색상의 투명도 설정
+            popup=f"{region} (횟수: {count})",  # 마커 클릭 시 팝업에 지역 이름과 횟수 표시
+        ).add_to(map_display)  # 지도에 추가
+
+        # 원 안에 횟수 표시
+        folium.Marker(
+            location=[latitude, longitude],  # 마커 위치는 동일
+            icon=folium.DivIcon(
+                html=f'<div style="font-size: 12px; color: black; text-align: center; line-height: 20px;">{count}</div>'
+            )  # 원 안에 횟수를 검정색으로 표시
+        ).add_to(map_display)  # 지도에 추가
+
+        # 지역 이름을 오른쪽에 표시 (텍스트 오른쪽으로 배치, 공백 확보)
+        folium.Marker(
+            location=[latitude, longitude],  # 마커 위치는 동일
+            popup=region,  # 마커 클릭 시 지역 이름 표시
+            icon=folium.DivIcon(
+                html=f'<div style="font-size: 12px; color: {color}; white-space: nowrap; transform: translateX(40px);">{region}</div>'
+            )  # 텍스트를 오른쪽으로 이동 (40px 공백)
+        ).add_to(map_display)  # 지도에 추가
+
+# 7. 범례 추가 (색상에 대한 범위 표시)
+legend_html = """
+      <div style="position: fixed;
+                  bottom: 30px; left: 30px; width: 200px; height: 180px;
+                  background-color: white; border:2px solid grey;
+                  z-index: 9999; font-size: 14px; padding: 10px;">
+        <b>색상 범례</b><br>
+        <i style="background: green; width: 20px; height: 20px; display: inline-block;"></i> 1-10 <br>
+        <i style="background: yellow; width: 20px; height: 20px; display: inline-block;"></i> 11-20 <br>
+        <i style="background: orange; width: 20px; height: 20px; display: inline-block;"></i> 21-30 <br>
+        <i style="background: red; width: 20px; height: 20px; display: inline-block;"></i> 30 이상
+    </div>
+"""
+map_display.get_root().html.add_child(folium.Element(legend_html))  # 범례 추가
+
+# 8. 지도 저장
+map_file = "map_with_counts_and_names_and_values_in_circle_right_text_more_space.html"  # 저장할 파일 이름
+map_display.save(map_file)  # 파일로 저장
+print(f"지도가 {map_file} 파일에 저장되었습니다.")  # 저장 완료 메시지
+
+# 9. 브라우저에서 지도 열기
+webbrowser.open(map_file)  # 브라우저에서 지도 열기("23.10.13-11.30 한국 빈대 출몰 현황.html")
 
 # 4. 히트맵 생성 (지역별 빈도)
 df_heatmap = pd.read_excel(excel_file, sheet_name=1)
