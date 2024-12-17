@@ -1,4 +1,3 @@
-
 # 🐞 파이썬을 이용한 데이터사이언스_캡스톤디자인 연계실습 🐞
 
 <div align> 
@@ -6,6 +5,8 @@
 <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white">
 <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white">
 </div align> 
+
+&nbsp;
 
 ## 👥 Members
 **[데이터사이언스학과]**
