@@ -126,6 +126,29 @@
 
 &nbsp;
 
+## 🍀 Resource
+****[image_crawling_link]****<br/>
+[bedbug_img](https://search.naver.com/search.naver?ssc=tab.image.all&where=image&sm=tab_jum&query=%EB%B9%88%EB%8C%80) <br/>
+[ant_img](https://search.naver.com/search.naver?sm=tab_hty.top&where=image&ssc=tab.image.all&query=%EA%B0%9C%EB%AF%B8&oquery=%EA%B1%B0%EB%AF%B8&tqi=i2Z0%2BdpzL8wssiSiTSVssssssSw-138964)<br/>
+[mosquito_img](https://search.naver.com/search.naver?sm=tab_hty.top&where=image&ssc=tab.image.all&query=%EB%AA%A8%EA%B8%B0&oquery=%EC%A7%84%EB%93%9C%EA%B8%B0&tqi=i2Z1awpzL8wssi4%2BHmsssssssd0-253630)<br/>
+[tick_img](https://search.naver.com/search.naver?sm=tab_hty.top&where=image&ssc=tab.image.all&query=%EC%A7%84%EB%93%9C%EA%B8%B0&oquery=%EA%B0%9C%EB%AF%B8&tqi=i2Z0%2FlqVOswsshRGwkwssssssmd-101476)<br/>
+
+<br>
+
+****[text_crawling_link]****<br/>
+[2023_bedbug_check](https://search.naver.com/search.naver?where=news&query=%EB%B9%88%EB%8C%80%20%ED%99%95%EC%9D%B8&sm=tab_opt&sort=2&photo=0&field=0&pd=3&ds=2023.10.13&de=2023.10.13&docid=&related=0&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so%3Ar%2Cp%3Afrom20231013to20231013&is_sug_officeid=0&office_category=0&service_area=0) <br/>
+[2023_bedbug_declaration](https://search.naver.com/search.naver?sm=tab_hty.top&where=news&ssc=tab.news.all&query=%EB%B9%88%EB%8C%80+%EC%8B%A0%EA%B3%A0&oquery=%EB%B9%88%EB%8C%80+%ED%99%95%EC%9D%B8&tqi=i2Z2dwqo1fsss6sMid0ssssssYR-349873&nso=so%3Ar%2Cp%3Afrom20231013to20231013&de=2023.10.13&ds=2023.10.13&mynews=0&office_category=0&office_section_code=0&office_type=0&pd=3&photo=0&service_area=0&sort=2) <br/>
+[2024_bedbug_check](https://search.naver.com/search.naver?where=news&query=%EB%B9%88%EB%8C%80%20%ED%99%95%EC%9D%B8&sm=tab_opt&sort=2&photo=0&field=0&pd=3&ds=2024.09.01&de=2024.11.30&docid=&related=0&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so%3Ar%2Cp%3Afrom20240901to20241130&is_sug_officeid=0&office_category=0&service_area=0) <br/>
+[2024_bedbug_declaration](https://search.naver.com/search.naver?sm=tab_hty.top&where=news&ssc=tab.news.all&query=%EB%B9%88%EB%8C%80+%EC%8B%A0%EA%B3%A0&oquery=%EB%B9%88%EB%8C%80+%ED%99%95%EC%9D%B8&tqi=i2Z3wdqo1e8ssi7341ossssstUd-088255&nso=so%3Ar%2Cp%3Afrom20240901to20241130&de=2024.11.30&ds=2024.09.01&mynews=0&office_category=0&office_section_code=0&office_type=0&pd=3&photo=0&service_area=0&sort=2) <br/>
+[2023_09_bedbug](https://search.naver.com/search.naver?where=news&query=%EB%B9%88%EB%8C%80&sm=tab_opt&sort=2&photo=0&field=0&pd=3&ds=2023.09.01&de=2023.09.01&docid=&related=0&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so%3Ar%2Cp%3Afrom20230901to20230901&is_sug_officeid=0&office_category=0&service_area=0) <br/>
+[2023_10_bedbug](https://search.naver.com/search.naver?where=news&query=%EB%B9%88%EB%8C%80&sm=tab_opt&sort=2&photo=0&field=0&pd=3&ds=2023.10.01&de=2023.10.01&docid=&related=0&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so%3Ar%2Cp%3Afrom20231001to20231001&is_sug_officeid=0&office_category=0&service_area=0) <br/>
+[2023_11_bedbug](https://search.naver.com/search.naver?where=news&query=%EB%B9%88%EB%8C%80&sm=tab_opt&sort=2&photo=0&field=0&pd=3&ds=2023.11.01&de=2023.11.01&docid=&related=0&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so%3Ar%2Cp%3Afrom20231101to20231101&is_sug_officeid=0&office_category=0&service_area=0) <br/>
+[2024_09_bedbug](https://search.naver.com/search.naver?where=news&query=%EB%B9%88%EB%8C%80&sm=tab_opt&sort=2&photo=0&field=0&pd=3&ds=2024.09.01&de=2024.09.01&docid=&related=0&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so%3Ar%2Cp%3Afrom20240901to20240901&is_sug_officeid=0&office_category=0&service_area=0)<br/>
+[2024_10_bedbug](https://search.naver.com/search.naver?where=news&query=%EB%B9%88%EB%8C%80&sm=tab_opt&sort=2&photo=0&field=0&pd=3&ds=2024.10.01&de=2024.10.01&docid=&related=0&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so%3Ar%2Cp%3Afrom20241001to20241001&is_sug_officeid=0&office_category=0&service_area=0) <br/>
+[2024_11_bedbug](https://search.naver.com/search.naver?where=news&query=%EB%B9%88%EB%8C%80&sm=tab_opt&sort=2&photo=0&field=0&pd=3&ds=2024.11.01&de=2024.11.01&docid=&related=0&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so%3Ar%2Cp%3Afrom20241101to20241101&is_sug_officeid=0&office_category=0&service_area=0) <br/>
+
+&nbsp;
+
 ## 🗓️ Schedule
 ```23.11.19```
 - 깃허브 기본 세팅
