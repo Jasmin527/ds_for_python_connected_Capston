@@ -9,7 +9,7 @@ font = font_manager.FontProperties(fname=font_path).get_name()
 rc('font', family=font)
 
 # 엑셀 파일 경로
-file_path = "기사 크롤링_처리결과_도시별빈도.xlsx"  # 입력 파일 경로
+file_path = "article_crawling_city.xlsx"  # 입력 파일 경로
 
 # 데이터 로드
 sheet_name = '지역별 빈도'
