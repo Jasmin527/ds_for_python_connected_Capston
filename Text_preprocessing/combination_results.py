@@ -1,8 +1,8 @@
 import pandas as pd
 
 # 파일 경로 설정
-file_path = "기사 크롤링_처리결과.xlsx"  # 기존 파일
-output_file = "기사 크롤링_처리결과_도시별빈도.xlsx"  # 저장할 파일 이름
+file_path = "article_crawling.xlsx"  # 기존 파일
+output_file = "article_crawling_city.xlsx"  # 저장할 파일 이름
 
 # 키워드 그룹 정의
 keyword_groups = {
