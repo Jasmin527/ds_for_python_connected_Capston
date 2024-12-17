@@ -8,14 +8,16 @@ from matplotlib import font_manager, rc
 import folium
 import webbrowser
 
-# 1. 한글 폰트 설정
+#한글 폰트 설정
 font_path = "C:/Windows/Fonts/malgun.ttf"  # Windows의 맑은 고딕 경로
 font = font_manager.FontProperties(fname=font_path).get_name()
 rc('font', family=font)
-rcParams['axes.unicode_minus'] = False  # 마이너스 기호도 제대로 표시되도록 설정
+rcParams['axes.unicode_minus'] = False  #마이너스 기호도 제대로 표시되도록 설정
 
-# 2. 엑셀 파일 경로 설정 및 읽기
+#엑셀 파일 경로 설정 및 읽기
 excel_file = "article_crawling_city.xlsx"
+
+#사용할 파일 저장하기
 file_paths = [
     "2023_09_bedbug.csv",
     "2023_10_bedbug.csv",
@@ -28,7 +30,7 @@ file_paths2 = [
     "2024_11_bedbug.csv"
 ]
 
-# 3. 대화형 지도 생성 및 저장
+#대화형 지도 생성 및 저장
 locations = {
     "서울특별시": [37.5729, 126.9794],
     "경기도": [37.2636, 127.0286],
@@ -47,61 +49,61 @@ locations = {
 }
 
 def get_color(value):
-    if value <= 10:  # 횟수가 10 이하일 경우
-        return "green"  # 초록색
-    elif 11 <= value <= 20:  # 횟수가 11~20일 경우
-        return "yellow"  # 노란색
-    elif 21 <= value <= 30:  # 횟수가 21~30일 경우
-        return "orange"  # 주황색
-    else:  # 횟수가 30 이상일 경우
-        return "red"  # 빨간색
+    if value <= 10:  #횟수가 10 이하일 경우
+        return "green"  #초록색
+    elif 11 <= value <= 20:  #횟수가 11~20일 경우
+        return "yellow"  #노란색
+    elif 21 <= value <= 30:  #횟수가 21~30일 경우
+        return "orange"  #주황색
+    else:  #횟수가 30 이상일 경우
+        return "red"  #빨간색
 
-# 5. 지도 생성 (중심은 서울로 설정)
-map_center = [37.5665, 126.9780]  # 서울특별시의 위도와 경도를 지도 중심으로 설정
-map_display = folium.Map(location=map_center, zoom_start=8)  # Folium으로 지도 객체 생성, zoom_level은 8로 설정
+#지도 생성 (중심은 서울로 설정)
+map_center = [37.5665, 126.9780]  #서울특별시의 위도와 경도를 지도 중심으로 설정
+map_display = folium.Map(location=map_center, zoom_start=8)  #Folium으로 지도 객체 생성, zoom_level은 8로 설정
 
-# 6. 각 지역에 대한 점을 지도에 추가
+#각 지역에 대한 점을 지도에 추가
 df_bar = pd.read_excel(excel_file, sheet_name=2)
-for _, row in df_bar.iterrows():  # 데이터프레임의 각 행을 반복하면서 처리
-    region = row['지역']  # 지역 이름
-    count = row['횟수']  # 횟수
+for _, row in df_bar.iterrows():  #데이터프레임의 각 행을 반복하면서 처리
+    region = row['지역']  #지역 이름
+    count = row['횟수']  #횟수
 
-    # 지역별 위도, 경도 정보 추출
-    if region in locations:  # 해당 지역이 locations에 존재하면
-        latitude, longitude = locations[region]  # 위도, 경도 정보 추출
+    #지역별 위도, 경도 정보 추출
+    if region in locations:  #해당 지역이 locations에 존재하면
+        latitude, longitude = locations[region]  #위도, 경도 정보 추출
 
-        # 횟수에 따라 색상 결정
+        #횟수에 따라 색상 결정
         color = get_color(count)  # 횟수에 맞는 색상 값 받아옴
 
-        # 원형 마커 추가 (색상과 크기 설정)
+        #원형 마커 추가 (색상과 크기 설정)
         circle_marker = folium.CircleMarker(
-            location=[latitude, longitude],  # 마커의 위치는 위도, 경도
-            radius=15,  # 원 크기 설정 (기본 크기보다 크게 설정)
-            color=color,  # 원 테두리 색상
-            fill=True,  # 원 안을 채우기
-            fill_color=color,  # 원 안 채우기 색상
-            fill_opacity=0.7,  # 채우기 색상의 투명도 설정
-            popup=f"{region} (횟수: {count})",  # 마커 클릭 시 팝업에 지역 이름과 횟수 표시
-        ).add_to(map_display)  # 지도에 추가
+            location=[latitude, longitude],  #마커의 위치는 위도, 경도
+            radius=15,  #원 크기 설정 (기본 크기보다 크게 설정)
+            color=color,  #원 테두리 색상
+            fill=True,  #원 안을 채우기
+            fill_color=color,  #원 안 채우기 색상
+            fill_opacity=0.7,  #채우기 색상의 투명도 설정
+            popup=f"{region} (횟수: {count})",  #마커 클릭 시 팝업에 지역 이름과 횟수 표시
+        ).add_to(map_display)  #지도에 추가
 
-        # 원 안에 횟수 표시
+        #원 안에 횟수 표시
         folium.Marker(
-            location=[latitude, longitude],  # 마커 위치는 동일
+            location=[latitude, longitude],  #마커 위치는 동일
             icon=folium.DivIcon(
                 html=f'<div style="font-size: 12px; color: black; text-align: center; line-height: 20px;">{count}</div>'
-            )  # 원 안에 횟수를 검정색으로 표시
-        ).add_to(map_display)  # 지도에 추가
+            )  #원 안에 횟수를 검정색으로 표시
+        ).add_to(map_display)  #지도에 추가
 
-        # 지역 이름을 오른쪽에 표시 (텍스트 오른쪽으로 배치, 공백 확보)
+        #지역 이름을 오른쪽에 표시 (텍스트 오른쪽으로 배치, 공백 확보)
         folium.Marker(
-            location=[latitude, longitude],  # 마커 위치는 동일
-            popup=region,  # 마커 클릭 시 지역 이름 표시
+            location=[latitude, longitude],  #마커 위치는 동일
+            popup=region,  #마커 클릭 시 지역 이름 표시
             icon=folium.DivIcon(
                 html=f'<div style="font-size: 12px; color: {color}; white-space: nowrap; transform: translateX(40px);">{region}</div>'
-            )  # 텍스트를 오른쪽으로 이동 (40px 공백)
-        ).add_to(map_display)  # 지도에 추가
+            )  #텍스트를 오른쪽으로 이동 (40px 공백)
+        ).add_to(map_display)  #지도에 추가
 
-# 7. 범례 추가 (색상에 대한 범위 표시)
+#범례 추가 (색상에 대한 범위 표시)
 legend_html = """
       <div style="position: fixed;
                   bottom: 30px; left: 30px; width: 200px; height: 180px;
@@ -114,17 +116,17 @@ legend_html = """
         <i style="background: red; width: 20px; height: 20px; display: inline-block;"></i> 30 이상
     </div>
 """
-map_display.get_root().html.add_child(folium.Element(legend_html))  # 범례 추가
+map_display.get_root().html.add_child(folium.Element(legend_html))  #범례 추가
 
-# 8. 지도 저장
-map_file = "map_with_counts_and_names_and_values_in_circle_right_text_more_space.html"  # 저장할 파일 이름
-map_display.save(map_file)  # 파일로 저장
-print(f"지도가 {map_file} 파일에 저장되었습니다.")  # 저장 완료 메시지
+#지도 저장
+map_file = "map_with_counts_and_names_and_values_in_circle_right_text_more_space.html"  #저장할 파일 이름
+map_display.save(map_file)  #파일로 저장
+print(f"지도가 {map_file} 파일에 저장되었습니다.")  #저장 완료 메시지
 
-# 9. 브라우저에서 지도 열기
+#브라우저에서 지도 열기
 webbrowser.open(map_file)  # 브라우저에서 지도 열기("23.10.13-11.30 한국 빈대 출몰 현황.html")
 
-# 4. 히트맵 생성 (지역별 빈도)
+#히트맵 생성 (지역별 빈도)
 df_heatmap = pd.read_excel(excel_file, sheet_name=1)
 pivot_df = df_heatmap.pivot_table(index='지역', values='횟수', aggfunc='sum', fill_value=0)
 plt.figure(figsize=(8, 6))
@@ -135,7 +137,7 @@ plt.ylabel('지역', fontsize=10)
 plt.savefig("지역별_빈대_확인_신고_기사_집중도.png")
 plt.show()
 
-# 5. 막대그래프 생성 (날짜에 따른 지역별 빈도)
+#막대그래프 생성 (날짜에 따른 지역별 빈도)
 regions = df_bar['지역']
 counts = df_bar['횟수']
 plt.figure(figsize=(12, 6))
@@ -147,12 +149,12 @@ plt.xticks(rotation=45)
 plt.savefig("날짜에_따른_지역별_빈대_출몰_기사_수.png")
 plt.show()
 
-# 6. 히스토그램 생성 (키워드별 뉴스 개수)
+#히스토그램 생성 (키워드별 뉴스 개수)
 df_histogram = pd.read_excel(excel_file, sheet_name=3)
 norm = plt.Normalize(df_histogram['뉴스 개수'].min(), df_histogram['뉴스 개수'].max())
 colors = plt.cm.Blues(norm(df_histogram['뉴스 개수']))
 
-# 새로운 Figure와 Axes 생성
+#새로운 Figure와 Axes 생성
 fig, ax = plt.subplots(figsize=(12, 6))
 bars = ax.bar(df_histogram['키워드'], df_histogram['뉴스 개수'], color=colors, edgecolor='black')
 
@@ -162,7 +164,7 @@ ax.set_ylabel('뉴스 개수', fontsize=10)
 ax.set_xticks(range(len(df_histogram['키워드'])))
 ax.set_xticklabels(df_histogram['키워드'], rotation=45)
 
-# Colorbar 추가
+#Colorbar 추가
 sm = plt.cm.ScalarMappable(cmap='Blues', norm=norm)
 sm.set_array([])
 cbar = plt.colorbar(sm, ax=ax, orientation='vertical', pad=0.02)
@@ -172,7 +174,7 @@ plt.tight_layout()
 plt.savefig("장소별_빈대_출몰_횟수.png")
 plt.show()
 
-# 7. 한국 지도 그리기 (Matplotlib)
+#한국 지도 그리기 (Matplotlib)
 map = Basemap(
     projection='merc',
     llcrnrlat=33.0,
@@ -212,7 +214,7 @@ plt.legend(handles=legend_handles, loc='lower left', title="횟수 범위")
 plt.savefig("한국_빈대_출몰_횟수.png")
 plt.show()
 
-# 8. 날짜별 기사 개수 꺾은선 그래프 생성
+#날짜별 기사 개수 꺾은선 그래프 생성
 date_counts, date_counts2 = [], []
 for file_path in file_paths:
     df = pd.read_csv(file_path)
