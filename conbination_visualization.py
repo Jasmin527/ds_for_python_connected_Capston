@@ -9,7 +9,7 @@ import folium
 import webbrowser
 
 #한글 폰트 설정
-font_path = "C:/Windows/Fonts/malgun.ttf"  # Windows의 맑은 고딕 경로
+font_path = "C:/Windows/Fonts/malgun.ttf"  #Windows의 맑은 고딕 경로
 font = font_manager.FontProperties(fname=font_path).get_name()
 rc('font', family=font)
 rcParams['axes.unicode_minus'] = False  #마이너스 기호도 제대로 표시되도록 설정
